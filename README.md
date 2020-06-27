@@ -1,6 +1,6 @@
-# county
+# County
 
-A new Flutter project.
+A new Flutter project to keep petty cash information
 
 ## Getting Started
 
