@@ -84,7 +84,7 @@ Future viewTotalTable() async {
   return result;
 }
 
-Future removeEntryFromTable(String tableName) async {
+Future removeLastEntryFromTable(String tableName) async {
   Database database;
   await setDatabase("naveen").then((db) {
     database = db;
@@ -92,6 +92,40 @@ Future removeEntryFromTable(String tableName) async {
   List<Map> list = await database.rawQuery(
       "DELETE FROM $tableName WHERE id = (SELECT MAX(id) FROM $tableName)");
   return list;
+}
+
+Future<bool> removeEntryFromTable(String tableName, int id) async {
+  Database database;
+  await setDatabase(tableName).then((db) {
+    database = db;
+  });
+  int row = await database.delete(tableName, where:"id == $id");
+  if(row > 0) {
+    print("$row deleted");
+    return true;
+  }
+  else {
+    print("$row deleted");
+    return false;
+  }
+}
+
+Future<bool> renameEntryFromTable(String tableName, int id, String newTitle) async {
+  Database database;
+  await setDatabase(tableName).then((db) {
+    database = db;
+  });
+  Map<String, String> entry = Map();
+  entry["title"] = newTitle;
+  int row = await database.update(tableName, entry, where:"id == $id");
+  if(row > 0) {
+    print("$row updated");
+    return true;
+  }
+  else {
+    print("$row not updated");
+    return false;
+  }
 }
 
 Future viewSumTable(String tableName) async {
