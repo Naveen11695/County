@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'Componets/Calender.dart';
 import 'Database.dart';
 import 'package:intl/intl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Naveen extends StatefulWidget {
   Naveen() : super();
@@ -18,13 +20,18 @@ class _Naveen extends State<Naveen> {
   static double totalSum = 0;
   static double totalAmount = 0;
   static double spent = 0;
-  final formatter = new NumberFormat("#,###");
+
 
   final _ctotal = TextEditingController();
   final _ctitle = TextEditingController();
   final _cdetails = TextEditingController();
   final _camount = TextEditingController();
   final _cNewName = TextEditingController();
+
+  static const _locale = 'en_IN';
+  final formatter = NumberFormat.decimalPattern(_locale);
+  String _formatNumber(String s) => NumberFormat.decimalPattern(_locale).format(int.parse(s));
+
 
   double metroAmount = 0.0;
 
@@ -57,22 +64,22 @@ class _Naveen extends State<Naveen> {
               children: <Widget>[
                 Expanded(
                     child: RaisedButton(
-                      elevation: 20,
-                      onPressed: () {
-                        // _displayDialog(context);
-                        _addNewTransaction(context);
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20.0),
-                              bottomLeft: Radius.circular(20.0))),
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      color: Colors.green,
-                      textColor: Colors.white,
-                    )),
+                  elevation: 20,
+                  onPressed: () {
+                    // _displayDialog(context);
+                    _addNewTransaction(context);
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          bottomLeft: Radius.circular(20.0))),
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                  color: Colors.green,
+                  textColor: Colors.white,
+                )),
                 Container(
                   height: 30,
                   width: 10,
@@ -80,23 +87,23 @@ class _Naveen extends State<Naveen> {
                 ),
                 Expanded(
                     child: RaisedButton(
-                      elevation: 20,
-                      onPressed: () {
-                        setState(() {
-                          removeLastEntryFromTable("naveen");
-                        });
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20.0),
-                              bottomRight: Radius.circular(20.0))),
-                      child: Icon(
-                        Icons.remove,
-                        color: Colors.white,
-                      ),
-                      color: Colors.red,
-                      textColor: Colors.white,
-                    )),
+                  elevation: 20,
+                  onPressed: () {
+                    setState(() {
+                      removeLastEntryFromTable("naveen");
+                    });
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0))),
+                  child: Icon(
+                    Icons.remove,
+                    color: Colors.white,
+                  ),
+                  color: Colors.red,
+                  textColor: Colors.white,
+                )),
               ],
             ),
           ),
@@ -141,7 +148,7 @@ class _Naveen extends State<Naveen> {
                                           children: <Widget>[
                                             Wrap(
                                               crossAxisAlignment:
-                                              WrapCrossAlignment.center,
+                                                  WrapCrossAlignment.center,
                                               alignment: WrapAlignment.center,
                                               children: <Widget>[
                                                 Column(
@@ -151,9 +158,9 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           fontWeight:
-                                                          FontWeight.w200),
+                                                              FontWeight.w200),
                                                     ),
                                                     new InkWell(
                                                       onTap: () {
@@ -167,20 +174,20 @@ class _Naveen extends State<Naveen> {
                                                         style: TextStyle(
                                                             fontSize: 25,
                                                             fontWeight:
-                                                            FontWeight.w600,
+                                                                FontWeight.w600,
                                                             fontFamily:
-                                                            "Pacifico",
+                                                                "Pacifico",
                                                             color:
-                                                            Colors.black),
+                                                                Colors.black),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 Padding(
                                                   padding:
-                                                  const EdgeInsets.only(
-                                                      left: 30.0,
-                                                      right: 20.0),
+                                                      const EdgeInsets.only(
+                                                          left: 30.0,
+                                                          right: 20.0),
                                                   child: new Container(
                                                     height: 40,
                                                     width: 1,
@@ -194,9 +201,9 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           fontWeight:
-                                                          FontWeight.w200),
+                                                              FontWeight.w200),
                                                     ),
                                                     new Text(
                                                       "₹ " +
@@ -206,18 +213,18 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 25,
                                                           fontWeight:
-                                                          FontWeight.w600,
+                                                              FontWeight.w600,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           color: Colors.black),
                                                     ),
                                                   ],
                                                 ),
                                                 Padding(
                                                   padding:
-                                                  const EdgeInsets.only(
-                                                      left: 30.0,
-                                                      right: 20.0),
+                                                      const EdgeInsets.only(
+                                                          left: 30.0,
+                                                          right: 20.0),
                                                   child: new Container(
                                                     height: 40,
                                                     width: 1,
@@ -231,9 +238,9 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           fontWeight:
-                                                          FontWeight.w200),
+                                                              FontWeight.w200),
                                                     ),
                                                     new Text(
                                                       "₹ " +
@@ -242,9 +249,9 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 25,
                                                           fontWeight:
-                                                          FontWeight.w600,
+                                                              FontWeight.w600,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           color: Colors.black),
                                                     ),
                                                   ],
@@ -263,7 +270,7 @@ class _Naveen extends State<Naveen> {
                                             Wrap(
                                               alignment: WrapAlignment.center,
                                               crossAxisAlignment:
-                                              WrapCrossAlignment.center,
+                                                  WrapCrossAlignment.center,
                                               children: <Widget>[
                                                 Column(
                                                   children: <Widget>[
@@ -272,9 +279,9 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           fontWeight:
-                                                          FontWeight.w300),
+                                                              FontWeight.w300),
                                                     ),
                                                     new Text(
                                                       "₹ " +
@@ -283,18 +290,18 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 25,
                                                           fontWeight:
-                                                          FontWeight.w600,
+                                                              FontWeight.w600,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           color: Colors.red),
                                                     ),
                                                   ],
                                                 ),
                                                 Padding(
                                                   padding:
-                                                  const EdgeInsets.only(
-                                                      left: 30.0,
-                                                      right: 20.0),
+                                                      const EdgeInsets.only(
+                                                          left: 30.0,
+                                                          right: 20.0),
                                                   child: new Container(
                                                     height: 40,
                                                     width: 1,
@@ -308,23 +315,23 @@ class _Naveen extends State<Naveen> {
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           fontWeight:
-                                                          FontWeight.w300),
+                                                              FontWeight.w300),
                                                     ),
                                                     new Text(
                                                       "₹ " +
                                                           formatter
                                                               .format(
-                                                              totalAmount -
-                                                                  spent)
+                                                                  totalAmount -
+                                                                      spent)
                                                               .toString(),
                                                       style: TextStyle(
                                                           fontSize: 30,
                                                           fontWeight:
-                                                          FontWeight.w600,
+                                                              FontWeight.w600,
                                                           fontFamily:
-                                                          "Pacifico",
+                                                              "Pacifico",
                                                           color: Colors.green),
                                                     ),
                                                   ],
@@ -374,10 +381,10 @@ class _Naveen extends State<Naveen> {
                                         return Dismissible(
                                           background: slideRightBackground(),
                                           secondaryBackground:
-                                          slideLeftBackground(),
+                                              slideLeftBackground(),
                                           key: new Key(trs[i].timeStamp),
                                           confirmDismiss: (DismissDirection
-                                          direction) async {
+                                              direction) async {
                                             if (direction ==
                                                 DismissDirection.endToStart) {
                                               return await showDialog(
@@ -386,7 +393,7 @@ class _Naveen extends State<Naveen> {
                                                     (BuildContext context) {
                                                   return AlertDialog(
                                                     title:
-                                                    const Text("Confirm"),
+                                                        const Text("Confirm"),
                                                     content: Wrap(
                                                       children: [
                                                         Text(
@@ -395,8 +402,8 @@ class _Naveen extends State<Naveen> {
                                                           " ${trs[i].title}",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
                                                         Text("?"),
                                                       ],
@@ -405,36 +412,30 @@ class _Naveen extends State<Naveen> {
                                                       FlatButton(
                                                           onPressed: () async {
                                                             removeEntryFromTable(
-                                                                "naveen",
-                                                                trs[i].id)
+                                                                    "naveen",
+                                                                    trs[i].id)
                                                                 .then((value) {
                                                               if (value) {
                                                                 setState(() {
                                                                   Navigator.of(
-                                                                      context)
+                                                                          context)
                                                                       .pop(
-                                                                      true);
+                                                                          true);
                                                                   _scaffoldKey
                                                                       .currentState
-                                                                      .showSnackBar(
-                                                                      new SnackBar(
+                                                                      .showSnackBar(new SnackBar(
                                                                           content:
-                                                                          Text(
-                                                                              "${trs[i]
-                                                                                  .title} is deleted successfully")));
+                                                                              Text("${trs[i].title} is deleted successfully")));
                                                                 });
                                                               } else {
                                                                 Navigator.of(
-                                                                    context)
+                                                                        context)
                                                                     .pop(false);
                                                                 _scaffoldKey
                                                                     .currentState
-                                                                    .showSnackBar(
-                                                                    new SnackBar(
+                                                                    .showSnackBar(new SnackBar(
                                                                         content:
-                                                                        Text(
-                                                                            "Failed to delete ${trs[i]
-                                                                                .title}")));
+                                                                            Text("Failed to delete ${trs[i].title}")));
                                                               }
                                                             });
                                                           },
@@ -447,7 +448,7 @@ class _Naveen extends State<Naveen> {
                                                       FlatButton(
                                                           onPressed: () async {
                                                             Navigator.of(
-                                                                context)
+                                                                    context)
                                                                 .pop(false);
                                                           },
                                                           child: const Text(
@@ -467,7 +468,7 @@ class _Naveen extends State<Naveen> {
                                                     (BuildContext context) {
                                                   return AlertDialog(
                                                     title:
-                                                    const Text("Confirm"),
+                                                        const Text("Confirm"),
                                                     content: Wrap(
                                                       children: [
                                                         Text(
@@ -476,28 +477,28 @@ class _Naveen extends State<Naveen> {
                                                           " ${trs[i].title}",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
                                                         Text("?"),
                                                         TextField(
                                                           controller: _cNewName,
                                                           keyboardType:
-                                                          TextInputType
-                                                              .text,
+                                                              TextInputType
+                                                                  .text,
                                                           decoration: InputDecoration(
                                                               hintText:
-                                                              "Enter new title",
+                                                                  "Enter new title",
                                                               hintStyle: TextStyle(
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                                      FontWeight
+                                                                          .w600,
                                                                   fontFamily:
-                                                                  "Pacifico",
+                                                                      "Raleway",
                                                                   letterSpacing:
-                                                                  2.0,
+                                                                      2.0,
                                                                   wordSpacing:
-                                                                  2.0)),
+                                                                      2.0)),
                                                         ),
                                                       ],
                                                     ),
@@ -507,48 +508,39 @@ class _Naveen extends State<Naveen> {
                                                             if (_cNewName.text
                                                                 .isNotEmpty) {
                                                               renameEntryFromTable(
-                                                                  "naveen",
-                                                                  trs[i].id,
-                                                                  _cNewName
-                                                                      .text
-                                                                      .trim())
+                                                                      "naveen",
+                                                                      trs[i].id,
+                                                                      _cNewName
+                                                                          .text
+                                                                          .trim())
                                                                   .then(
                                                                       (value) {
-                                                                    if (value) {
-                                                                      setState(() {
-                                                                        _cNewName
-                                                                            .text =
-                                                                        "";
-                                                                        Navigator
-                                                                            .of(
+                                                                if (value) {
+                                                                  setState(() {
+                                                                    _cNewName
+                                                                        .text = "";
+                                                                    Navigator.of(
                                                                             context)
-                                                                            .pop(
+                                                                        .pop(
                                                                             true);
-                                                                        _scaffoldKey
-                                                                            .currentState
-                                                                            .showSnackBar(
-                                                                            new SnackBar(
-                                                                                content:
-                                                                                Text(
-                                                                                    "${trs[i]
-                                                                                        .title} is rename successfully")));
-                                                                      });
-                                                                    } else {
-                                                                      Navigator
-                                                                          .of(
-                                                                          context)
-                                                                          .pop(
-                                                                          false);
-                                                                      _scaffoldKey
-                                                                          .currentState
-                                                                          .showSnackBar(
-                                                                          new SnackBar(
-                                                                              content:
-                                                                              Text(
-                                                                                  "Failed to rename ${trs[i]
-                                                                                      .title}")));
-                                                                    }
+                                                                    _scaffoldKey
+                                                                        .currentState
+                                                                        .showSnackBar(new SnackBar(
+                                                                            content:
+                                                                                Text("${trs[i].title} is rename successfully")));
                                                                   });
+                                                                } else {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop(
+                                                                          false);
+                                                                  _scaffoldKey
+                                                                      .currentState
+                                                                      .showSnackBar(new SnackBar(
+                                                                          content:
+                                                                              Text("Failed to rename ${trs[i].title}")));
+                                                                }
+                                                              });
                                                             }
                                                           },
                                                           child: const Text(
@@ -560,7 +552,7 @@ class _Naveen extends State<Naveen> {
                                                       FlatButton(
                                                           onPressed: () async {
                                                             Navigator.of(
-                                                                context)
+                                                                    context)
                                                                 .pop(false);
                                                           },
                                                           child: const Text(
@@ -587,23 +579,23 @@ class _Naveen extends State<Naveen> {
                                                     fontWeight: FontWeight.w500,
                                                     letterSpacing: 0.2,
                                                     fontStyle:
-                                                    FontStyle.italic),
+                                                        FontStyle.italic),
                                               ),
                                               new ExpansionTile(
                                                 backgroundColor: Colors.black87,
                                                 title: Column(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                      MainAxisAlignment.start,
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
+                                                      CrossAxisAlignment.end,
                                                   children: <Widget>[
                                                     Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .start,
+                                                            MainAxisAlignment
+                                                                .start,
                                                         crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .end,
+                                                            CrossAxisAlignment
+                                                                .end,
                                                         children: [
                                                           Expanded(
                                                             flex: 1,
@@ -613,17 +605,17 @@ class _Naveen extends State<Naveen> {
                                                                   .toUpperCase(),
                                                               style: new TextStyle(
                                                                   fontSize:
-                                                                  15.0,
+                                                                      15.0,
                                                                   fontFamily:
-                                                                  "Montserrat",
+                                                                      "Montserrat",
                                                                   fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                                      FontWeight
+                                                                          .bold,
                                                                   fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
+                                                                      FontStyle
+                                                                          .normal,
                                                                   letterSpacing:
-                                                                  0.5,
+                                                                      0.5,
                                                                   color: textColor(
                                                                       trs[i])),
                                                             ),
@@ -631,20 +623,20 @@ class _Naveen extends State<Naveen> {
                                                         ]),
                                                     Padding(
                                                       padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10.0),
+                                                          const EdgeInsets.only(
+                                                              top: 10.0),
                                                       child: Text(
                                                         dateformat(
                                                             trs[i].timeStamp),
                                                         textAlign:
-                                                        TextAlign.end,
+                                                            TextAlign.end,
                                                         maxLines: 1,
                                                         style: new TextStyle(
                                                             fontSize: 12.0,
                                                             fontFamily:
-                                                            "Pacifico",
+                                                                "Pacifico",
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             letterSpacing: 0.8,
                                                             fontStyle: FontStyle
                                                                 .italic),
@@ -655,8 +647,8 @@ class _Naveen extends State<Naveen> {
                                                 children: <Widget>[
                                                   new Column(
                                                     children:
-                                                    _buildExpandableContent(
-                                                        trs[i]),
+                                                        _buildExpandableContent(
+                                                            trs[i]),
                                                   ),
                                                 ],
                                               ),
@@ -670,7 +662,7 @@ class _Naveen extends State<Naveen> {
                                                     fontWeight: FontWeight.w500,
                                                     letterSpacing: 0.2,
                                                     fontStyle:
-                                                    FontStyle.italic),
+                                                        FontStyle.italic),
                                               ),
                                             ],
                                           ),
@@ -714,26 +706,27 @@ class _Naveen extends State<Naveen> {
               fontFamily: "Raleway",
               fontSize: 18.0,
               color: trans.title.compareTo("METRO RECHARGE") == 0 ||
-                  trans.amount < 0
+                      trans.amount < 0
                   ? Colors.blueGrey
                   : Colors.red,
             ),
           ),
           leading: Icon(
-            Icons.account_balance_wallet,
+            trans.title.compareTo("METRO RECHARGE") == 0 ?
+            FontAwesomeIcons.subway : (trans.amount > 0 ? FontAwesomeIcons.wallet: FontAwesomeIcons.coins),
             color: Colors.white,
             size: 30.0,
           ),
           trailing: new Text(
             trans.title.compareTo("METRO RECHARGE") == 0 || trans.amount < 0
-                ? " - ₹ " + trans.amount.toString().replaceFirst("-", "")
-                : " + ₹ " + trans.amount.toString(),
+                ? " - ₹ " + formatter.format(trans.amount).toString().replaceFirst("-", "")
+                : " + ₹ " + formatter.format(trans.amount).toString(),
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontFamily: "Montserrat",
               fontSize: 18.0,
               color: trans.title.compareTo("METRO RECHARGE") == 0 ||
-                  trans.amount < 0
+                      trans.amount < 0
                   ? Colors.blueGrey
                   : Colors.red,
             ),
@@ -827,112 +820,130 @@ class _Naveen extends State<Naveen> {
   }
 
   _addNewTransaction(context) async {
-    return showGeneralDialog(barrierColor: Colors.black.withOpacity(0.5),
+    return showGeneralDialog(
+        barrierColor: Colors.black.withOpacity(0.5),
         transitionBuilder: (context, a1, a2, widget) {
           return Transform.scale(
             scale: a1.value,
             child: Container(
-              height: 100.0 * a1.value,  // USE PROVIDED ANIMATION
+              height: 100.0 * a1.value, // USE PROVIDED ANIMATION
               width: 100.0 * a1.value,
-              child: AlertDialog(
-                title: Text(
-                  'New Transcation',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
-                ),
-                content: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: TextField(
-                        controller: _ctitle,
-                        decoration: InputDecoration(
-                            hintText: "title",
-                            hintStyle: TextStyle(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: AlertDialog(
+                  insetPadding: EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  title: Text(
+                    'New Transcation',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, fontFamily: "Montserrat"),
+                  ),
+                  content: Builder(
+                    builder: (context) {
+                      // Get available height and width of the build area of this widget. Make a choice depending on the size.
+                      var height = MediaQuery.of(context).size.height;
+                      var width = MediaQuery.of(context).size.width;
+
+                      return Container(
+                        height: height * 0.20,
+                        width: width - 100,
+                        child: Column(
+                          children: <Widget>[
+                            TextField(
+                              controller: _ctitle,
+                              decoration: InputDecoration(
+                                  hintText: "title",
+                                  hintStyle: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: "Raleway",
+                                      letterSpacing: 2.0)),
+                            ),
+                            TextField(
+                              controller: _cdetails,
+                              decoration: InputDecoration(
+                                  hintText: "detail",
+                                  hintStyle: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: "Raleway",
+                                      letterSpacing: 2.0)),
+                            ),
+                            TextField(
+                              controller: _camount,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                hintText: "Amount",
+                                icon: Icon(FontAwesomeIcons.rupeeSign),
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Raleway",
+                                    letterSpacing: 2.0),
+                              ),
+                              onChanged: (string) {
+                                string = '${_formatNumber(string.replaceAll(',', ''))}';
+                                _camount.value = TextEditingValue(
+                                  text: string,
+                                  selection: TextSelection.collapsed(offset: string.length),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  actions: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        new FlatButton(
+                          child: new Text(
+                            'ADD METRO RECHARGE',
+                            style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontFamily: "Raleway",
-                                letterSpacing: 2.0)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 60.0),
-                      child: TextField(
-                        controller: _cdetails,
-                        decoration: InputDecoration(
-                            hintText: "detail",
-                            hintStyle: TextStyle(
+                                fontFamily: "Montserrat",
+                                color: Colors.green),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              insertTotable("naveen", "METRO RECHARGE",
+                                  "Metro Recharge of ₹500", 500.0);
+                              Navigator.of(context).pop();
+                            });
+                          },
+                        ),
+                        new FlatButton(
+                          child: new Text(
+                            'SUBMIT',
+                            style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontFamily: "Raleway",
-                                letterSpacing: 2.0)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 110.0),
-                      child: TextField(
-                        controller: _camount,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            hintText: "amount",
-                            hintStyle: TextStyle(
+                                fontFamily: "Montserrat",
+                                color: Colors.red),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              insertTotable("naveen", _ctitle.text,
+                                  _cdetails.text, double.parse(_camount.text));
+                              Navigator.of(context).pop();
+                            });
+                          },
+                        ),
+                        new FlatButton(
+                          child: new Text(
+                            'CANCEL',
+                            style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontFamily: "Raleway",
-                                letterSpacing: 2.0)),
-                      ),
+                                fontFamily: "Montserrat"),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                actions: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      new FlatButton(
-                        child: new Text(
-                          'ADD METRO RECHARGE',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Montserrat",
-                              color: Colors.green),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            insertTotable("naveen", "METRO RECHARGE",
-                                "Metro Recharge of ₹500", 500.0);
-                            Navigator.of(context).pop();
-                          });
-                        },
-                      ),
-                      new FlatButton(
-                        child: new Text(
-                          'SUBMIT',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Montserrat",
-                              color: Colors.red),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            insertTotable(
-                                "naveen", _ctitle.text, _cdetails.text,
-                                double.parse(_camount.text));
-                            Navigator.of(context).pop();
-                          });
-                        },
-                      ),
-                      new FlatButton(
-                        child: new Text(
-                          'CANCEL',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Montserrat"),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ),
           );
